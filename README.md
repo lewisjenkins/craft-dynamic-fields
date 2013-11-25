@@ -12,12 +12,10 @@ A simple plugin for populating Craft fields with dynamic data.
 
 Probably easier to describe with a screenshot :
 
-![My image](username.github.com/repository/img/image.jpg)
+![My image](https://raw.github.com/lewisjenkins/craft-lj-dynamicfields/master/screenshot.png)
 
 
 
 **Tested on**
 
 + Craft 1.3
-
-![My image](https://github.com/lewisjenkins/craft-lj-dynamicfields/blob/master/screenshot.png)
