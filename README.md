@@ -14,7 +14,14 @@ Probably easier to describe with a screenshot :
 
 ![My image](https://raw.github.com/lewisjenkins/craft-lj-dynamicfields/master/screenshot.png)
 
+**Version 0.1**
 
++ Initial release
++ Dropdown fieldtype
+
+** Todo **
+
++ Add more fieldtypes :)
 
 **Tested on**
 
