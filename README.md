@@ -10,9 +10,46 @@ A simple plugin for populating Craft fields with dynamic data.
 
 **Useage**
 
-Probably easiest to describe with a screengrab :
+This plugin adds the following fieldtypes:
+
++ Checkboxes (dynamic)
++ Dropdown (dynamic)
++ Multi-select (dynamic)
+
+You can populate the options for each fieldtye using JSON, like this :
+
+    { "value":"jim" , "label":"Jim Beam" },
+    { "value":"jack" , "label":"Jack Daniels" , "default":true },
+    { "value":"mark" , "label":"Maker's Mark" }
+	
+No big deal, right? But the real power of this plugin is it's ability to use Twig logic :
+
+    {% for entry in craft.entries.limit(null).order('title') %}
+        { "value":"{{ entry.slug }}" , "label":"{{ entry | raw }}"
+            {% if entry.uri == '__home__' %} , "default":true{% endif %}
+        }{% if not loop.last %},{% endif %}
+    {% endfor %}
+	
+Because you're able to use Twig, you can pull in all sorts of useful data. You can even include a template :
+
+    {% include '_dynamicfields/sections' ignore missing %}
+	
+Example code for /craft/templates/_dynamicfields/sections.html
+
+	{% for section in craft.sections.getAllSections() %}
+        { "value":"{{ section.handle }}" , "label":"{{ section | raw }}" }
+        {% if not loop.last %},{% endif %}
+    {% endfor %}
+	
+*Basically, any data that can be manipulated in your templates is now available for selection within your fields.*
+
+Still confused? Here is a screengrab :
 
 ![My image](https://raw.github.com/lewisjenkins/craft-lj-dynamicfields/master/screenshot.png)
+
+**Version 0.3**
+
++ Added Checkboxes fieldtype
 
 **Version 0.2**
 

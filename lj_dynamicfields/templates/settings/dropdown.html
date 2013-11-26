@@ -39,14 +39,14 @@
     </p>
     <h3>4. Template example</h3>
     <p>
-    <pre class="code">{ "optgroup":"Sections" }
-{% include 'dynamicfields/sections' ignore missing %}
+    <pre class="code">{% include '_dynamicfields/sections' ignore missing %}
 </pre>
     </p>
-    <p>Example code for /craft/templates/dynamicfields/sections.html
+    <p>Example code for /craft/templates/_dynamicfields/sections.html
 <pre class="code">
 {% for section in craft.sections.getAllSections() %}
-    , { "value":"{{ section.handle }}" , "label":"{{ section | raw }}" }
+    { "value":"{{ section.handle }}" , "label":"{{ section | raw }}" }
+    {% if not loop.last %},{% endif %}
 {% endfor %}
 </pre>
     </p>
