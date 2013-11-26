@@ -22,7 +22,7 @@
     <h3>2. Twig example</h3>
     <p>
     <pre class="code">{% for entry in craft.entries.limit(null).order('title') %}
-    { "value":"{{ entry.slug }}" , "label":"{{ entry | raw }}"
+    { "value":"{{ entry.id }}" , "label":"{{ entry | raw }}"
         {% if entry.uri == '__home__' %} , "default":true{% endif %}
     }{% if not loop.last %},{% endif %}
 {% endfor %}
@@ -36,7 +36,7 @@
     <p>Example code for /craft/templates/_dynamicfields/sections.html
 <pre class="code">
 {% for section in craft.sections.getAllSections() %}
-    { "value":"{{ section.handle }}" , "label":"{{ section | raw }}" }
+    { "value":"{{ section.id }}" , "label":"{{ section | raw }}" }
     {% if not loop.last %},{% endif %}
 {% endfor %}
 </pre>

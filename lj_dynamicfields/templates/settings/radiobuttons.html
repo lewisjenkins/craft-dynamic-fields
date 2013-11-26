@@ -2,7 +2,7 @@
 {{ textareaField({
 	id: name,
 	name: name,
-    label: 'Dropdown Options',
+    label: 'Radio Button Options',
     instructions: 'JSON format. Twig code is <del>allowed</del> encouraged :)',
     rows: 7,
     class: 'code',
@@ -18,17 +18,7 @@
 { "value":"mark" , "label":"Maker's Mark" }
 </pre>
     </p>
-    <h3>2. Option groups example</h3>
-    <p>
-    <pre class="code">{ "optgroup":"Whiskey" },
-{ "value":"jim" , "label":"Jim Beam" },
-{ "value":"jack" , "label":"Jack Daniels" , "default":true },
-{ "optgroup":"Vodka" },
-{ "value":"absolut" , "label":"Absolut" },
-{ "value":"smirnoff" , "label":"Smirnoff" }
-</pre>
-    </p>
-    <h3>3. Twig example</h3>
+    <h3>2. Twig example</h3>
     <p>
     <pre class="code">{% for entry in craft.entries.limit(null).order('title') %}
     { "value":"{{ entry.id }}" , "label":"{{ entry | raw }}"
@@ -37,7 +27,7 @@
 {% endfor %}
 </pre>
     </p>
-    <h3>4. Template example</h3>
+    <h3>3. Template example</h3>
     <p>
     <pre class="code">{% include '_dynamicfields/sections' ignore missing %}
 </pre>

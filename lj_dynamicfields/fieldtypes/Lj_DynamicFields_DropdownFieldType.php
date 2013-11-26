@@ -25,7 +25,7 @@ class Lj_DynamicFields_DropdownFieldType extends BaseFieldType
 			endforeach;
 		endif;
 		
-		return craft()->templates->render('lj_dynamicfields/input/dropdown', array(
+		return craft()->templates->render('_includes/forms/select', array(
 			'name' => $name,
 			'value' => $value,
 			'options' => $options

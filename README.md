@@ -15,6 +15,7 @@ This plugin adds the following fieldtypes:
 + Checkboxes (dynamic)
 + Dropdown (dynamic)
 + Multi-select (dynamic)
++ Radio Buttons (dynamic)
 
 You can populate the options for each fieldtye using JSON, like this :
 
@@ -25,7 +26,7 @@ You can populate the options for each fieldtye using JSON, like this :
 No big deal, right? But the real power of this plugin is it's ability to use Twig logic :
 
     {% for drink in craft.entries.section('drinks') %}
-        { "value":"{{ drink.slug }}" , "label":"{{ drink | raw }}"
+        { "value":"{{ drink.id }}" , "label":"{{ drink | raw }}"
             {% if drink.slug == 'jack' %} , "default":true{% endif %}
         }{% if not loop.last %},{% endif %}
     {% endfor %}
@@ -34,10 +35,10 @@ Because you're able to use Twig, you can pull in all sorts of useful data. You c
 
     {% include '_dynamicfields/sections' ignore missing %}
 	
-Example code for /craft/templates/_dynamicfields/sections.html
+Example code for `/craft/templates/_dynamicfields/sections.html`
 
 	{% for section in craft.sections.getAllSections() %}
-        { "value":"{{ section.handle }}" , "label":"{{ section | raw }}" }
+        { "value":"{{ section.id }}" , "label":"{{ section | raw }}" }
         {% if not loop.last %},{% endif %}
     {% endfor %}
 	
@@ -46,6 +47,10 @@ Example code for /craft/templates/_dynamicfields/sections.html
 Still confused? Here is a screengrab :
 
 ![My image](https://raw.github.com/lewisjenkins/craft-lj-dynamicfields/master/screenshot.png)
+
+**Version 0.4**
+
++ Added Radio Buttons fieldtype
 
 **Version 0.3**
 
@@ -57,8 +62,8 @@ Still confused? Here is a screengrab :
 
 **Version 0.1**
 
-+ Initial release
 + Added Dropdown fieldtype
++ Initial release
 
 **Todo**
 

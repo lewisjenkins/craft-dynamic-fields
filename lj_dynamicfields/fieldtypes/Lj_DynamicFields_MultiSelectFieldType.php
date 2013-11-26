@@ -27,7 +27,7 @@ class Lj_DynamicFields_MultiSelectFieldType extends BaseFieldType
 			endforeach;
 		endif;
 		
-		return craft()->templates->render('lj_dynamicfields/input/multiselect', array(
+		return craft()->templates->render('_includes/forms/multiselect', array(
 			'name' => $name,
 			'values' => $values,
 			'options' => $options

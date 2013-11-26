@@ -2,14 +2,14 @@
 
 namespace Craft;
 
-class Lj_DynamicFields_CheckboxesFieldType extends BaseFieldType
+class Lj_DynamicFields_RadioButtonsFieldType extends BaseFieldType
 {
 	public function getName()
 	{
-		return Craft::t('Checkboxes (dynamic)');
+		return Craft::t('Radio Buttons (dynamic)');
 	}
 
-	public function getInputHtml($name, $values)
+	public function getInputHtml($name, $value)
 	{
 		$oldTemplatesPath = craft()->path->getTemplatesPath();
 		craft()->path->setTemplatesPath(craft()->path->getSiteTemplatesPath());
@@ -17,19 +17,17 @@ class Lj_DynamicFields_CheckboxesFieldType extends BaseFieldType
 		craft()->path->setTemplatesPath($oldTemplatesPath);
 		
 		if ($this->isFresh()) :
-		
-		$values = array();
-		
 			foreach ($options as $option) :
 				if (!empty($option['default'])) :
-					$values[] = $option['value'];
+					$value = $option['value'];
+					break;
 				endif;
 			endforeach;
 		endif;
 		
-		return craft()->templates->render('_includes/forms/checkboxGroup', array(
+		return craft()->templates->render('_includes/forms/radioGroup', array(
 			'name' => $name,
-			'values' => $values,
+			'value' => $value,
 			'options' => $options
 		));
 	}
@@ -43,7 +41,7 @@ class Lj_DynamicFields_CheckboxesFieldType extends BaseFieldType
 	
 	public function getSettingsHtml()
     {
-        return craft()->templates->render('lj_dynamicfields/settings/checkboxes', array(
+        return craft()->templates->render('lj_dynamicfields/settings/radiobuttons', array(
 			'name' => 'json',
 			'settings' => $this->getSettings()
         ));
