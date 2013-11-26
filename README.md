@@ -10,14 +10,18 @@ A simple plugin for populating Craft fields with dynamic data.
 
 **Useage**
 
-Probably easier to describe with a screengrab :
+Probably easiest to describe with a screengrab :
 
 ![My image](https://raw.github.com/lewisjenkins/craft-lj-dynamicfields/master/screenshot.png)
+
+**Version 0.2**
+
++ Added Multi-select fieldtype
 
 **Version 0.1**
 
 + Initial release
-+ Dropdown fieldtype
++ Added Dropdown fieldtype
 
 **Todo**
 
