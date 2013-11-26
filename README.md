@@ -24,9 +24,9 @@ You can populate the options for each fieldtye using JSON, like this :
 	
 No big deal, right? But the real power of this plugin is it's ability to use Twig logic :
 
-    {% for entry in craft.entries.limit(null).order('title') %}
-        { "value":"{{ entry.slug }}" , "label":"{{ entry | raw }}"
-            {% if entry.uri == '__home__' %} , "default":true{% endif %}
+    {% for drink in craft.entries.section('drinks') %}
+        { "value":"{{ drink.slug }}" , "label":"{{ drink | raw }}"
+            {% if drink.slug == 'jack' %} , "default":true{% endif %}
         }{% if not loop.last %},{% endif %}
     {% endfor %}
 	
