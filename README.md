@@ -50,7 +50,7 @@ Still confused? Here is a screengrab :
 
 **Version 0.4.1**
 
-+ Bug fix: multi-type fields are now saved to db as 'text' rather than varchar(255) to allow for large arrays.
++ Improved: multi-type fields are now saved to db as 'text' rather than varchar(255) to allow for large arrays.
 
 **Version 0.4**
 
