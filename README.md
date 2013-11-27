@@ -46,7 +46,11 @@ Example code for `/craft/templates/_dynamicfields/sections.html`
 
 Still confused? Here is a screengrab :
 
-![My image](https://raw.github.com/lewisjenkins/craft-lj-dynamicfields/master/screenshot.png)
+![My image](https://raw.github.com/lewisjenkins/craft-lj-dynamicfields/master/screengrab.png)
+
+**Version 0.4.1**
+
++ Bug fix: multi-type fields are now saved to db as 'text' rather than varchar(255) to allow for large arrays.
 
 **Version 0.4**
 

@@ -41,6 +41,11 @@ class Lj_DynamicFields_MultiSelectFieldType extends BaseFieldType
         );
     }
 	
+	public function defineContentAttribute()
+    {
+        return AttributeType::Mixed;
+    }
+	
 	public function getSettingsHtml()
     {
         return craft()->templates->render('lj_dynamicfields/settings/multiselect', array(

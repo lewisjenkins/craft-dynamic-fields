@@ -39,6 +39,11 @@ class Lj_DynamicFields_RadioButtonsFieldType extends BaseFieldType
         );
     }
 	
+	public function defineContentAttribute()
+    {
+        return AttributeType::String;
+    }
+	
 	public function getSettingsHtml()
     {
         return craft()->templates->render('lj_dynamicfields/settings/radiobuttons', array(
