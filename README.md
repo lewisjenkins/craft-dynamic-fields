@@ -48,25 +48,29 @@ Still confused? Here is a screengrab :
 
 ![My image](https://raw.github.com/lewisjenkins/craft-lj-dynamicfields/master/screengrab.png)
 
+**Version 0.5**
+
++ Improved: Globals can now be directly referenced by handle.
+
 **Version 0.4.1**
 
 + Improved: multi-type fields are now saved to db as 'text' rather than varchar(255) to allow for large arrays.
 
 **Version 0.4**
 
-+ Added Radio Buttons fieldtype
++ Added: Radio Buttons fieldtype
 
 **Version 0.3**
 
-+ Added Checkboxes fieldtype
++ Added: Checkboxes fieldtype
 
 **Version 0.2**
 
-+ Added Multi-select fieldtype
++ Added: Multi-select fieldtype
 
 **Version 0.1**
 
-+ Added Dropdown fieldtype
++ Added: Dropdown fieldtype
 + Initial release
 
 **Todo**

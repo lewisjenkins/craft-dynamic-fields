@@ -10,7 +10,7 @@ class Lj_DynamicFieldsPlugin extends BasePlugin
 
     function getVersion()
     {
-        return '0.4.1';
+        return '0.5';
     }
 
     function getDeveloper()

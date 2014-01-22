@@ -13,7 +13,16 @@ class Lj_DynamicFields_DropdownFieldType extends BaseFieldType
 	{
 		$oldTemplatesPath = craft()->path->getTemplatesPath();
 		craft()->path->setTemplatesPath(craft()->path->getSiteTemplatesPath());
-		$options = json_decode('[' . craft()->templates->renderString($this->getSettings()->json) . ']', true);
+		
+		$variables = array();
+		foreach (craft() -> globals -> getAllSets() as $globalSet) :
+			$variables[$globalSet->handle] = $globalSet;
+		endforeach;
+		
+		$variables['element'] = $this->element;
+		$variables['model'] = $this->model;
+		
+		$options = json_decode('[' . craft()->templates->renderString($this->getSettings()->json, $variables) . ']', true);
 		craft()->path->setTemplatesPath($oldTemplatesPath);
 		
 		if ($this->isFresh()) :
