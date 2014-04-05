@@ -79,5 +79,5 @@ Still confused? Here is a screengrab :
 
 **Tested on**
 
-+ Craft 1.4 dev
++ Craft 2.0
 + Craft 1.3
