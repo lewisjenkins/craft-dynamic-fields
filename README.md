@@ -79,4 +79,4 @@ Still confused? Here is a screengrab :
 
 **Tested on**
 
-+ All versions of Craft (including latest Craft 2.3)
++ All versions of Craft (including latest Craft 2.5).
