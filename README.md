@@ -79,4 +79,4 @@ Still confused? Here is a screengrab :
 
 **Tested on**
 
-+ Requires Craft 2.6.2778+ (see [here](http://craftcms.stackexchange.com/questions/14375/how-do-i-fix-gettemplatespath-settemplatespath-deprecation-errors)
++ Requires Craft 2.6.2778+ (see [here](http://craftcms.stackexchange.com/questions/14375/how-do-i-fix-gettemplatespath-settemplatespath-deprecation-errors))
