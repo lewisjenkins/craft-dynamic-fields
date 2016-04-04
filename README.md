@@ -48,6 +48,10 @@ Still confused? Here is a screengrab :
 
 ![My image](https://raw.github.com/lewisjenkins/craft-lj-dynamicfields/master/screengrab.png)
 
+**Version 0.6**
+
++ Fixed: getTemplatesPath() / setTemplatesPath() deprecation errors and now requiring Craft 2.6.2778+ as a result. (see [here](http://craftcms.stackexchange.com/questions/14375/how-do-i-fix-gettemplatespath-settemplatespath-deprecation-errors)). Thanks [Josh Angell](https://github.com/joshangell).
+
 **Version 0.5**
 
 + Improved: Globals can now be directly referenced by handle.
