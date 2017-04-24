@@ -1,3 +1,5 @@
+_April 2017 update - I've had a few people ask about the future of this plugin. I will be updating it for Craft 3 fairly soon, and will look to include any feature requests at that point. I don't anticipate any further updates for Craft 2._
+
 ### LJ Dynamic Fields plugin for Craft CMS
 
 A simple plugin for populating Craft fields with dynamic data.
