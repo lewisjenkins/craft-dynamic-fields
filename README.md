@@ -1,4 +1,4 @@
-_February 2018 update - This plugin is currently being updated and will be released in time for the official lauch of Craft 3 at the beginning of April._
+_February 2018 update - This plugin is currently being updated and will be released in time for the official launch of Craft 3 at the beginning of April._
 
 ### LJ Dynamic Fields plugin for Craft CMS
 
