@@ -30,7 +30,7 @@ class Lj_DynamicFieldsPlugin extends BasePlugin
      */
     public function onBeforeInstall()
     {
-      if (version_compare(craft()->getVersion().'.'.craft()->getBuild(), '2.6.2778', '<'))
+      if (version_compare(craft()->getVersion(), '2.6.2778', '<'))
       {
         throw new Exception('LJ Dynamic Fields 0.6+ requires Craft CMS 2.6.2778+ in order to run.');
       }
