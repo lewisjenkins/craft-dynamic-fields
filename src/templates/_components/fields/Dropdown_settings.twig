@@ -1,0 +1,85 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textareaField({
+    id: 'dropdownOptions',
+    name: 'dropdownOptions',
+    label: 'Dropdown Options',
+    instructions: 'Define the available options.',
+    rows: 7,
+    class: 'code',
+    value: field['dropdownOptions']
+    })
+}}
+
+<hr>
+
+{% verbatim %}
+    <h2>Quick start</h2>
+    <p>Copy one of the following examples into the Dropdown Options field above.</p>
+    
+    <h3>Simple example</h3>
+    <p>
+    <pre class="code">{ "value":"jim", "label":"Jim Beam" },
+{ "value":"jack", "label":"Jack Daniels", "default":true },
+{ "value":"mark", "label":"Maker's Mark" },
+{ "value":"rebel", "label":"Rebel Yell" }
+</pre>
+    </p>
+    
+    <h3>Option groups example</h3>
+    <p>
+    <pre class="code">{ "optgroup":"Whiskey" },
+{ "value":"jim", "label":"Jim Beam" },
+{ "value":"jack", "label":"Jack Daniels", "default":true },
+{ "optgroup":"Vodka" },
+{ "value":"absolut", "label":"Absolut" },
+{ "value":"smirnoff", "label":"Smirnoff" }
+</pre>
+    </p>
+    
+    <h3>All sections</h3>
+    <p>
+    <pre class="code">{% for section in craft.app.sections.allSections %}
+    {{ loop.index > 1 ? ',' }} {    
+        "value":"{{ section.id }}",
+        "label":"{{ section|e }}"
+    }
+{% endfor %}
+</pre>
+    </p>
+    
+    <h3>All entries, ordered by title</h3>
+    <p>
+    <pre class="code">{% for entry in craft.entries.orderBy('title').all() %}
+    {{ loop.index > 1 ? ',' }} {    
+        "value":"{{ entry.id }}",
+        "label":"{{ entry|e }}",
+        "default":{{ entry.slug == 'home' ? 'true' : 'false' }}
+    }
+{% endfor %}
+</pre>
+    </p>
+    
+    <h3>Every first Saturday of the month</h3>
+    <p>
+    <pre class="code">{% for i in 1..6 %}
+    {% set eventDate = now|date_modify('first saturday of +' ~ i ~ ' month') %}
+    {{ loop.index > 1 ? ',' }} {
+        "value":"{{ eventDate|date('Y-m-d') }}",
+        "label":"{{ eventDate|date("l, jS F Y") }}"
+    }
+{% endfor %}
+</pre>
+    </p>
+    
+    <h3>Template example</h3>
+    <p>
+    <pre class="code">{% include '_dynamicfields/usStates.json' ignore missing %}
+</pre>
+    </p>
+    <p>Example code for templates/_dynamicfields/usStates.json
+<pre class="code" style="white-space: pre-wrap;">
+{ "label":"Alabama", "value":"AL" }, { "label":"Alaska", "value":"AK" }, { "label":"American Samoa", "value":"AS" }, { "label":"Arizona", "value":"AZ" }, { "label":"Arkansas", "value":"AR" }, { "label":"California", "value":"CA" }, { "label":"Colorado", "value":"CO" }, { "label":"Connecticut", "value":"CT" }, { "label":"Delaware", "value":"DE" }, { "label":"District Of Columbia", "value":"DC" }, { "label":"Federated States Of Micronesia", "value":"FM" }, { "label":"Florida", "value":"FL" }, { "label":"Georgia", "value":"GA" }, { "label":"Guam", "value":"GU" }, { "label":"Hawaii", "value":"HI" }, { "label":"Idaho", "value":"ID" }, { "label":"Illinois", "value":"IL" }, { "label":"Indiana", "value":"IN" }, { "label":"Iowa", "value":"IA" }, { "label":"Kansas", "value":"KS" }, { "label":"Kentucky", "value":"KY" }, { "label":"Louisiana", "value":"LA" }, { "label":"Maine", "value":"ME" }, { "label":"Marshall Islands", "value":"MH" }, { "label":"Maryland", "value":"MD" }, { "label":"Massachusetts", "value":"MA" }, { "label":"Michigan", "value":"MI" }, { "label":"Minnesota", "value":"MN" }, { "label":"Mississippi", "value":"MS" }, { "label":"Missouri", "value":"MO" }, { "label":"Montana", "value":"MT" }, { "label":"Nebraska", "value":"NE" }, { "label":"Nevada", "value":"NV" }, { "label":"New Hampshire", "value":"NH" }, { "label":"New Jersey", "value":"NJ" }, { "label":"New Mexico", "value":"NM" }, { "label":"New York", "value":"NY" }, { "label":"North Carolina", "value":"NC" }, { "label":"North Dakota", "value":"ND" }, { "label":"Northern Mariana Islands", "value":"MP" }, { "label":"Ohio", "value":"OH" }, { "label":"Oklahoma", "value":"OK" }, { "label":"Oregon", "value":"OR" }, { "label":"Palau", "value":"PW" }, { "label":"Pennsylvania", "value":"PA" }, { "label":"Puerto Rico", "value":"PR" }, { "label":"Rhode Island", "value":"RI" }, { "label":"South Carolina", "value":"SC" }, { "label":"South Dakota", "value":"SD" }, { "label":"Tennessee", "value":"TN" }, { "label":"Texas", "value":"TX" }, { "label":"Utah", "value":"UT" }, { "label":"Vermont", "value":"VT" }, { "label":"Virgin Islands", "value":"VI" }, { "label":"Virginia", "value":"VA" }, { "label":"Washington", "value":"WA" }, { "label":"West Virginia", "value":"WV" }, { "label":"Wisconsin", "value":"WI" }, { "label":"Wyoming", "value":"WY" }
+</pre>
+    </p>
+{% endverbatim %}

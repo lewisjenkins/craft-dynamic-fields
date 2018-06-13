@@ -1,0 +1,44 @@
+{
+    "name": "lewisjenkins/craft-dynamic-fields",
+    "description": "Populate Craft fields with dynamic data using the power of Twig.",
+    "type": "craft-plugin",
+    "version": "3.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft dynamic fields"
+    ],
+    "support": {
+        "docs": "https://github.com/lewisjenkins/craft-dynamic-fields/blob/master/README.md",
+        "issues": "https://github.com/lewisjenkins/craft-dynamic-fields/issues",
+        "email": "lewis@lj.io"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Lewis Jenkins",
+            "homepage": "https://lj.io"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "lewisjenkins\\craftdynamicfields\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Craft Dynamic Fields",
+        "handle": "craft-dynamic-fields",
+        "developer": "Lewis Jenkins",
+        "developerUrl": "https://lj.io",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/lewisjenkins/craft-dynamic-fields/master/CHANGELOG.md",
+        "documentationUrl": "https://github.com/lewisjenkins/craft-dynamic-fields/blob/master/README.md",
+        "class": "lewisjenkins\\craftdynamicfields\\CraftDynamicFields"
+    }
+}

@@ -1,0 +1,24 @@
+{% if name is defined and name %}
+    <input type="hidden" name="{{ name }}" value="">
+{% endif -%}
+
+{%- set options = (options is defined ? options : []) %}
+{%- set values = (values is defined ? values : []) %}
+{%- set name = (name is defined and name ? name~'[]' : null) %}
+
+<div class="checkbox-group"
+        {%- if block('attr') is defined %} {{ block('attr') }}{% endif %}>
+    {%- for key, option in options %}
+        {%- if option is not iterable %}
+            {%- set option = {label: option, value: key} %}
+        {%- endif %}
+        <div>
+            {% include "craft-dynamic-fields/_includes/forms/checkbox" with {
+                id:        (loop.first and id is defined ? id : null),
+                name:      name,
+                checked:   (option.value is defined and option.value in values),
+                autofocus: (autofocus is defined and autofocus and loop.first and not craft.app.request.isMobileBrowser(true))
+            }|merge(option) only %}
+        </div>
+    {%- endfor %}
+</div>
