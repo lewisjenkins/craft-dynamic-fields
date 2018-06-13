@@ -2,7 +2,7 @@
     "name": "lewisjenkins/craft-dynamic-fields",
     "description": "Populate Craft fields with dynamic data using the power of Twig.",
     "type": "craft-plugin",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "keywords": [
         "craft",
         "cms",
