@@ -105,9 +105,38 @@ You can even configure your field options in a separate template file.
 
 ![Screenshot](resources/img/6.png)
 
-#### Advanced examples
+## More useful examples
 
-... coming soon ...
+#### Time range picker
+
+    {% set startTime = '09:00' %}
+    {% set endTime = '17:00' %}
+    {% set defaultTime = '13:00' %}
+    {% set increments = 15 %}
+    {% for time in range(
+    	startTime|date('U'),
+    	endTime|date('U'),
+    	increments * 60
+    	) %}
+        {{ loop.index > 1 ? ',' }} {    
+            "value":"{{ time|date('H:i') }}",
+            "label":"{{ time|date('H:i') }}",
+            "default":{{ time|date('H:i') == defaultTime ? 'true' : 'false' }}
+        }
+    {% endfor %}
+
+#### Date range picker
+
+    {% set startDate = '2018-05-18' %}
+    {% for i in 0..14 %}
+        {% set date = startDate|date_modify('+' ~ i ~ ' day') %}
+        {{ loop.index > 1 ? ',' }} {
+            "value":"{{ date|date('Y-m-d') }}",
+            "label":"{{ date|date("l, jS F Y") }}"
+        }
+    {% endfor %}
+
+More examples to follow ...
 
 ---
 
