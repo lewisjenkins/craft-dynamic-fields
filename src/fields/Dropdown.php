@@ -39,27 +39,27 @@ class Dropdown extends Field
 
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-
+	    
 		$view = Craft::$app->getView();
 		$templateMode = $view->getTemplateMode();
 		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
-	
+		
 		$variables['element'] = $element;
 		$variables['this'] = $this;
 		
 		$options = json_decode('[' . $view->renderString($this->dropdownOptions, $variables) . ']', true);
 		
 		$view->setTemplateMode($templateMode);
-
+		
 		if ($this->isFresh($element) ) :
 			foreach ($options as $key => $option) :
-		    	if (!empty($option['default'])) :
-		    		$value = $option['value'];
+				if (!empty($option['default'])) :
+					$value = $option['value'];
 				endif;
 			endforeach;
 		endif;
-	
-        return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/select', [
+		
+		return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/select', [
             'name' => $this->handle,
             'value' => $value,
             'options' => $options,

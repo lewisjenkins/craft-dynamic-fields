@@ -41,11 +41,11 @@ class Multiselect extends Field
 
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-
+	    
 		$view = Craft::$app->getView();
 		$templateMode = $view->getTemplateMode();
 		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
-	
+		
 		$variables['element'] = $element;
 		$variables['this'] = $this;
 		
@@ -55,12 +55,12 @@ class Multiselect extends Field
 		
 		if ($this->isFresh($element) ) :
 			foreach ($options as $key => $option) :
-		    	if (!empty($option['default'])) :
-		    		$value[] = $option['value'];
+				if (!empty($option['default'])) :
+					$value[] = $option['value'];
 				endif;
 			endforeach;
 		endif;
-	
+		
         return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/multiselect', [
             'name' => $this->handle,
             'values' => (is_string($value) ? json_decode($value) : $value),
