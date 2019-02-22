@@ -15,6 +15,7 @@ class Dropdown extends Field
 {
      
     public $dropdownOptions = '';
+    public $columnType = 'text';
 
     public static function displayName(): string
     {
@@ -30,6 +31,11 @@ class Dropdown extends Field
             ]
         );
     }
+    
+    public function getContentColumnType(): string
+    {
+        return $this->columnType;
+    }
 
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -44,18 +50,14 @@ class Dropdown extends Field
 		$options = json_decode('[' . $view->renderString($this->dropdownOptions, $variables) . ']', true);
 		
 		$view->setTemplateMode($templateMode);
-		
-		foreach ($options as $key => $option) :
 
-		    if ($this->isFresh($element) ) :
+		if ($this->isFresh($element) ) :
+			foreach ($options as $key => $option) :
 		    	if (!empty($option['default'])) :
 		    		$value = $option['value'];
 				endif;
-			endif;
-			
-			// unset($options[$key]['selected']);
-
-		endforeach; 
+			endforeach;
+		endif;
 	
         return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/select', [
             'name' => $this->handle,

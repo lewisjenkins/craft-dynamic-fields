@@ -15,6 +15,7 @@ class Checkboxes extends Field
 {
      
     public $checkboxOptions = '';
+    public $columnType = 'text';
 
     public static function displayName(): string
     {
@@ -29,6 +30,11 @@ class Checkboxes extends Field
                 'field' => $this,
             ]
         );
+    }
+    
+    public function getContentColumnType(): string
+    {
+        return $this->columnType;
     }
 
     public function getInputHtml($value, ElementInterface $element = null): string
@@ -45,17 +51,13 @@ class Checkboxes extends Field
 		
 		$view->setTemplateMode($templateMode);
 
-		foreach ($options as $key => $option) :
-
-		    if ($this->isFresh($element) ) :
+		if ($this->isFresh($element) ) :
+			foreach ($options as $key => $option) :
 		    	if (!empty($option['default'])) :
 		    		$value[] = $option['value'];
 				endif;
-			endif;
-			
-			// unset($options[$key]['checked']);
-
-		endforeach; 
+			endforeach;
+		endif;
 
         return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/checkboxGroup', [
             'name' => $this->handle,

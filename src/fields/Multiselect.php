@@ -15,7 +15,9 @@ class Multiselect extends Field
 {
      
     public $multiselectOptions = '';
-    public $fieldSettings = '';
+    public $fieldSettings = ''; // legacy
+    public $columnType = 'text';
+    public $fieldHeight = 0;
 
     public static function displayName(): string
     {
@@ -31,6 +33,11 @@ class Multiselect extends Field
             ]
         );
     }
+    
+    public function getContentColumnType(): string
+    {
+        return $this->columnType;
+    }
 
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -43,27 +50,22 @@ class Multiselect extends Field
 		$variables['this'] = $this;
 		
 		$options = json_decode('[' . $view->renderString($this->multiselectOptions, $variables) . ']', true);
-		$blah = json_decode('{' . $view->renderString($this->fieldSettings, $variables) . '}', true);
 		
 		$view->setTemplateMode($templateMode);
 		
-		foreach ($options as $key => $option) :
-
-		    if ($this->isFresh($element) ) :
+		if ($this->isFresh($element) ) :
+			foreach ($options as $key => $option) :
 		    	if (!empty($option['default'])) :
 		    		$value[] = $option['value'];
 				endif;
-			endif;
-			
-			// unset($options[$key]['selected']);
-
-		endforeach; 
+			endforeach;
+		endif;
 	
         return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/multiselect', [
             'name' => $this->handle,
-            'values' => $value,
+            'values' => (is_string($value) ? json_decode($value) : $value),
             'options' => $options,
-            'size' => ($blah['size'] ?? '4')
+            'size' => ($this->fieldHeight > 0 ? $this->fieldHeight : count($options))
         ]);
     }
 }

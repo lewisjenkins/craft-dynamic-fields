@@ -5,25 +5,40 @@
     name: 'multiselectOptions',
     label: 'Multi-select Options',
     instructions: 'Define the available options.',
-    rows: 7,
+    rows: 10,
     class: 'code',
     value: field['multiselectOptions']
     })
 }}
 
+{{ forms.textField({
+    label: "Multi-select Field Height",
+    instructions: "The number of visible options in the field. Use 0 for auto-height.",
+    id: 'fieldHeight',
+    name: 'fieldHeight',
+    value: field.fieldHeight,
+    size: 3
+}) }}
+
 <a class="fieldtoggle" data-target="advanced">Advanced</a>
 <div id="advanced" class="hidden">
-    
-{{ forms.textareaField({
-    id: 'fieldSettings',
-    name: 'fieldSettings',
-    label: 'Multi-select Settings',
-    instructions: 'Additional settings for this field.',
-    rows: 1,
-    class: 'code',
-    value: (field['fieldSettings'] ? field['fieldSettings'] : '"size" : "4"')
-    })
-}}
+
+{% if craft.app.db.isMysql %}
+{{ forms.selectField({
+    label: "Column Type",
+    id: 'columnType',
+    name: 'columnType',
+    instructions: "The type of column this field should get in the database.",
+    options: [
+        { value: 'string', label: 'varchar (255B)' },
+        { value: 'text', label: 'text (~64KB)' },
+        { value: 'mediumtext', label: 'mediumtext (~16MB)' },
+    ],
+    value: field.columnType,
+    warning: (field.id ? "Changing this may result in data loss."),
+}) }}
+{% endif %}
+
 </div>
 
 <hr>
