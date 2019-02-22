@@ -8,17 +8,7 @@ This plugin requires Craft CMS 3.0.0 or later.
 
 ## Installation
 
-To install the plugin, follow these instructions.
-
-1. Open your terminal and go to your Craft project:
-
-        cd /path/to/project
-
-2. Then tell Composer to load the plugin:
-
-        composer require lewisjenkins/craft-dynamic-fields
-
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Craft Dynamic Fields.
+You can install the plugin via the Craft Plugin Store.
 
 ## Craft Dynamic Fields Overview
 
@@ -105,9 +95,42 @@ You can even configure your field options in a separate template file.
 
 ![Screenshot](resources/img/6.png)
 
-#### Advanced examples
+## More useful examples
 
-... coming soon ...
+#### Time range picker
+
+    {% set startTime = '09:00' %}
+    {% set endTime = '17:00' %}
+    {% set defaultTime = '13:00' %}
+    {% set increments = 15 %}
+    {% for time in range(
+    	startTime|date('U'),
+    	endTime|date('U'),
+    	increments * 60
+    	) %}
+        {{ loop.index > 1 ? ',' }} {    
+            "value":"{{ time|date('H:i') }}",
+            "label":"{{ time|date('H:i') }}",
+            "default":{{ time|date('H:i') == defaultTime ? 'true' : 'false' }}
+        }
+    {% endfor %}
+
+#### Date range picker
+
+    {% set startDate = '2018-05-18' %}
+    {% for i in 0..14 %}
+        {% set date = startDate|date_modify('+' ~ i ~ ' day') %}
+        {{ loop.index > 1 ? ',' }} {
+            "value":"{{ date|date('Y-m-d') }}",
+            "label":"{{ date|date("l, jS F Y") }}"
+        }
+    {% endfor %}
+
+#### UK Counties
+
+    { "value":"Aberdeenshire", "label":"Aberdeenshire" }, { "value":"Angus", "label":"Angus" }, { "value":"Antrim", "label":"Antrim" }, { "value":"Argyll", "label":"Argyll" }, { "value":"Armagh", "label":"Armagh" }, { "value":"Ayrshire", "label":"Ayrshire" }, { "value":"Banffshire", "label":"Banffshire" }, { "value":"Bedfordshire", "label":"Bedfordshire" }, { "value":"Bedfordshire", "label":"Berkshire" }, { "value":"Berwickshire", "label":"Berwickshire" }, { "value":"Bristol", "label":"Bristol" }, { "value":"Buckinghamshire", "label":"Buckinghamshire" }, { "value":"Bute", "label":"Bute" }, { "value":"Caithness", "label":"Caithness" }, { "value":"Cambridgeshire", "label":"Cambridgeshire" }, { "value":"Cheshire", "label":"Cheshire" }, { "value":"City of London", "label":"City of London" }, { "value":"Clackmannanshire", "label":"Clackmannanshire" }, { "value":"Clwyd", "label":"Clwyd" }, { "value":"Cornwall", "label":"Cornwall" }, { "value":"Cumbria", "label":"Cumbria" }, { "value":"Derbyshire", "label":"Derbyshire" }, { "value":"Devon", "label":"Devon" }, { "value":"Dorset", "label":"Dorset" }, { "value":"Down", "label":"Down" }, { "value":"Dumfriesshire", "label":"Dumfriesshire" }, { "value":"Dunbartonshire", "label":"Dunbartonshire" }, { "value":"Durham", "label":"Durham" }, { "value":"Dyfed", "label":"Dyfed" }, { "value":"East Lothian", "label":"East Lothian" }, { "value":"East Riding of Yorkshire", "label":"East Riding of Yorkshire" }, { "value":"East Sussex", "label":"East Sussex" }, { "value":"Essex", "label":"Essex" }, { "value":"Fermanagh", "label":"Fermanagh" }, { "value":"Fife", "label":"Fife" }, { "value":"Gloucestershire", "label":"Gloucestershire" }, { "value":"Greater London", "label":"Greater London" }, { "value":"Greater Manchester", "label":"Greater Manchester" }, { "value":"Gwent", "label":"Gwent" }, { "value":"Gwynedd", "label":"Gwynedd" }, { "value":"Hampshire", "label":"Hampshire" }, { "value":"Herefordshire", "label":"Herefordshire" }, { "value":"Hertfordshire", "label":"Hertfordshire" }, { "value":"Inverness-shire", "label":"Inverness-shire" }, { "value":"Isle of Wight", "label":"Isle of Wight" }, { "value":"Kent", "label":"Kent" }, { "value":"Kincardineshire", "label":"Kincardineshire" }, { "value":"Kinross-shire", "label":"Kinross-shire" }, { "value":"Kirkcudbrightshire", "label":"Kirkcudbrightshire" }, { "value":"Lanarkshire", "label":"Lanarkshire" }, { "value":"Lancashire", "label":"Lancashire" }, { "value":"Leicestershire", "label":"Leicestershire" }, { "value":"Lincolnshire", "label":"Lincolnshire" }, { "value":"Londonderry", "label":"Londonderry" }, { "value":"Merseyside", "label":"Merseyside" }, { "value":"Mid Glamorgan", "label":"Mid Glamorgan" }, { "value":"Midlothian", "label":"Midlothian" }, { "value":"Moray", "label":"Moray" }, { "value":"Nairnshire", "label":"Nairnshire" }, { "value":"Norfolk", "label":"Norfolk" }, { "value":"North Yorkshire", "label":"North Yorkshire" }, { "value":"Northamptonshire", "label":"Northamptonshire" }, { "value":"Northumberland", "label":"Northumberland" }, { "value":"Nottinghamshire", "label":"Nottinghamshire" }, { "value":"Orkney", "label":"Orkney" }, { "value":"Oxfordshire", "label":"Oxfordshire" }, { "value":"Peeblesshire", "label":"Peeblesshire" }, { "value":"Perthshire", "label":"Perthshire" }, { "value":"Powys", "label":"Powys" }, { "value":"Renfrewshire", "label":"Renfrewshire" }, { "value":"Ross and Cromarty", "label":"Ross and Cromarty" }, { "value":"Roxburghshire", "label":"Roxburghshire" }, { "value":"Rutland", "label":"Rutland" }, { "value":"Selkirkshire", "label":"Selkirkshire" }, { "value":"Shetland", "label":"Shetland" }, { "value":"Shropshire", "label":"Shropshire" }, { "value":"Somerset", "label":"Somerset" }, { "value":"South Glamorgan", "label":"South Glamorgan" }, { "value":"South Yorkshire", "label":"South Yorkshire" }, { "value":"Staffordshire", "label":"Staffordshire" }, { "value":"Stirlingshire", "label":"Stirlingshire" }, { "value":"Suffolk", "label":"Suffolk" }, { "value":"Surrey", "label":"Surrey" }, { "value":"Sutherland", "label":"Sutherland" }, { "value":"Tyne and Wear", "label":"Tyne and Wear" }, { "value":"Tyrone", "label":"Tyrone" }, { "value":"Warwickshire", "label":"Warwickshire" }, { "value":"West Glamorgan", "label":"West Glamorgan" }, { "value":"West Lothian", "label":"West Lothian" }, { "value":"West Midlands", "label":"West Midlands" }, { "value":"West Sussex", "label":"West Sussex" }, { "value":"West Yorkshire", "label":"West Yorkshire" }, { "value":"Wigtownshire", "label":"Wigtownshire" }, { "value":"Wiltshire", "label":"Wiltshire" }, { "value":"Worcestershire", "label":"Worcestershire" }
+
+More examples to follow ...
 
 ---
 
