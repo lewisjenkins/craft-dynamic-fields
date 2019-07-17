@@ -13,7 +13,7 @@ use craft\helpers\Json;
 
 class Multiselect extends Field
 {
-     
+
     public $multiselectOptions = '';
     public $fieldSettings = ''; // legacy
     public $columnType = 'text';
@@ -39,9 +39,35 @@ class Multiselect extends Field
         return $this->columnType;
     }
 
+    public function normalizeValue($value, ElementInterface $element = null): string
+    {
+		if ($this->isFresh($element)) :
+			foreach ($this->getOptions() as $key => $option) :
+				if (!empty($option['default'])) :
+					$value[] = $option['value'];
+				endif;
+			endforeach;
+		endif;
+		
+		if (is_array($value)) :
+			$value = json_encode($value);
+		endif;
+		
+		return (is_null($value) ? '' : $value);
+    }
+    
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-	    
+        return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/multiselect', [
+            'name' => $this->handle,
+            'values' => $value,
+            'options' => $this->getOptions(),
+            'size' => ($this->fieldHeight > 0 ? $this->fieldHeight : count($this->getOptions()))
+        ]);
+    }
+    
+    private function getOptions(ElementInterface $element = null): array
+    {
 		$view = Craft::$app->getView();
 		$templateMode = $view->getTemplateMode();
 		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
@@ -53,19 +79,7 @@ class Multiselect extends Field
 		
 		$view->setTemplateMode($templateMode);
 		
-		if ($this->isFresh($element) ) :
-			foreach ($options as $key => $option) :
-				if (!empty($option['default'])) :
-					$value[] = $option['value'];
-				endif;
-			endforeach;
-		endif;
-		
-        return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/multiselect', [
-            'name' => $this->handle,
-            'values' => (is_string($value) ? json_decode($value) : $value),
-            'options' => $options,
-            'size' => ($this->fieldHeight > 0 ? $this->fieldHeight : count($options))
-        ]);
+		return $options;
     }
+    
 }

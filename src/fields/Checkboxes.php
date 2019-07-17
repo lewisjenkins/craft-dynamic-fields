@@ -13,7 +13,7 @@ use craft\helpers\Json;
 
 class Checkboxes extends Field
 {
-     
+
     public $checkboxOptions = '';
     public $columnType = 'text';
 
@@ -37,9 +37,34 @@ class Checkboxes extends Field
         return $this->columnType;
     }
 
+    public function normalizeValue($value, ElementInterface $element = null): string
+    {
+		if ($this->isFresh($element)) :
+			foreach ($this->getOptions() as $key => $option) :
+				if (!empty($option['default'])) :
+					$value[] = $option['value'];
+				endif;
+			endforeach;
+		endif;
+		
+		if (is_array($value)) :
+			$value = json_encode($value);
+		endif;
+		
+		return (is_null($value) ? '' : $value);
+    }
+    
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-	    
+		return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/checkboxGroup', [
+            'name' => $this->handle,
+            'values' => $value,
+            'options' => $this->getOptions()
+        ]);
+    }
+    
+    private function getOptions(ElementInterface $element = null): array
+    {
 		$view = Craft::$app->getView();
 		$templateMode = $view->getTemplateMode();
 		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
@@ -51,18 +76,7 @@ class Checkboxes extends Field
 		
 		$view->setTemplateMode($templateMode);
 		
-		if ($this->isFresh($element) ) :
-			foreach ($options as $key => $option) :
-				if (!empty($option['default'])) :
-					$value[] = $option['value'];
-				endif;
-			endforeach;
-		endif;
-		
-		return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/checkboxGroup', [
-            'name' => $this->handle,
-            'values' => $value,
-            'options' => $options,
-        ]);
+		return $options;
     }
+    
 }

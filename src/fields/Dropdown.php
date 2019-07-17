@@ -37,13 +37,34 @@ class Dropdown extends Field
         return $this->columnType;
     }
 
+    public function normalizeValue($value, ElementInterface $element = null): string
+    {	
+		if ($this->isFresh($element) ) :
+			foreach ($this->getOptions() as $key => $option) :
+				if (!empty($option['default'])) :
+					$value = $option['value'];
+				endif;
+			endforeach;
+		endif;
+		
+		return (is_null($value) ? '' : $value);
+    }
+    
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-	    
+		return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/select', [
+            'name' => $this->handle,
+            'value' => $value,
+            'options' => $this->getOptions()
+        ]);
+    }
+    
+    private function getOptions(ElementInterface $element = null): array
+    {
 		$view = Craft::$app->getView();
 		$templateMode = $view->getTemplateMode();
 		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
-		
+
 		$variables['element'] = $element;
 		$variables['this'] = $this;
 		
@@ -51,18 +72,7 @@ class Dropdown extends Field
 		
 		$view->setTemplateMode($templateMode);
 		
-		if ($this->isFresh($element) ) :
-			foreach ($options as $key => $option) :
-				if (!empty($option['default'])) :
-					$value = $option['value'];
-				endif;
-			endforeach;
-		endif;
-		
-		return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/select', [
-            'name' => $this->handle,
-            'value' => $value,
-            'options' => $options,
-        ]);
-    }
+		return $options;
+    }  
+
 }
