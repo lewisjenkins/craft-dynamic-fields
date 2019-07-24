@@ -83,7 +83,7 @@ Here is a multi-select field containing all sections.
 
 You can even configure your field options in a separate template file.
 
-    {% include _dynamicfields/usStates.json ignore missing %}
+    {% include '_dynamicfields/usStates.json' ignore missing %}
 
 <!-- -->
 
