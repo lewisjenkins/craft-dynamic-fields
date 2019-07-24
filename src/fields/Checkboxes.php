@@ -13,7 +13,6 @@ use craft\helpers\Json;
 
 class Checkboxes extends Field
 {
-
     public $checkboxOptions = '';
     public $columnType = 'text';
 
@@ -39,8 +38,19 @@ class Checkboxes extends Field
 
     public function normalizeValue($value, ElementInterface $element = null): string
     {
+		$view = Craft::$app->getView();
+		$templateMode = $view->getTemplateMode();
+		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
+		
+		$variables['element'] = $element;
+		$variables['this'] = $this;
+		
+		$options = json_decode('[' . $view->renderString($this->checkboxOptions, $variables) . ']', true);
+		
+		$view->setTemplateMode($templateMode);
+		
 		if ($this->isFresh($element)) :
-			foreach ($this->getOptions() as $key => $option) :
+			foreach ($options as $key => $option) :
 				if (!empty($option['default'])) :
 					$value[] = $option['value'];
 				endif;
@@ -56,19 +66,10 @@ class Checkboxes extends Field
     
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-		return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/checkboxGroup', [
-            'name' => $this->handle,
-            'values' => $value,
-            'options' => $this->getOptions()
-        ]);
-    }
-    
-    private function getOptions(ElementInterface $element = null): array
-    {
 		$view = Craft::$app->getView();
 		$templateMode = $view->getTemplateMode();
 		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
-		
+
 		$variables['element'] = $element;
 		$variables['this'] = $this;
 		
@@ -76,7 +77,10 @@ class Checkboxes extends Field
 		
 		$view->setTemplateMode($templateMode);
 		
-		return $options;
+		return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/checkboxGroup', [
+            'name' => $this->handle,
+            'values' => $value,
+            'options' => $options
+        ]);
     }
-    
 }
