@@ -1,4 +1,4 @@
-# Craft Dynamic Fields Changelog
+# LJ Dynamic Fields Changelog
 
 All notable changes to this project will be documented in this file.
 
