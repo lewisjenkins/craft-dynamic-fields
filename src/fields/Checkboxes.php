@@ -82,9 +82,18 @@ class Checkboxes extends Field
 		$variables['element'] = $element;
 		$variables['this'] = $this;
 
+    $siteHandle = Craft::$app->request->get('site', null);
+    $currentSite = Craft::$app->sites->currentSite;
+    if ($siteHandle && $siteHandle !== $currentSite->handle) {
+      Craft::$app->sites->setCurrentSite(Craft::$app->sites->getSiteByHandle($siteHandle));
+    }
+
 		$options = json_decode('[' . $view->renderString($this->checkboxOptions, $variables) . ']', true);
 
 		$view->setTemplateMode($templateMode);
+    if ($siteHandle !== $currentSite->handle) {
+			Craft::$app->sites->setCurrentSite($currentSite);
+		}
 
 		return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/checkboxGroup', [
             'name' => $this->handle,
