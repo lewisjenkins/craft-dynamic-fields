@@ -38,55 +38,55 @@ class Checkboxes extends Field
 
     public function normalizeValue($value, ElementInterface $element = null): string
     {
-		$view = Craft::$app->getView();
-		$templateMode = $view->getTemplateMode();
-		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
+        $view = Craft::$app->getView();
+        $templateMode = $view->getTemplateMode();
+        $view->setTemplateMode($view::TEMPLATE_MODE_SITE);
 
-		$variables['element'] = $element;
-		$variables['this'] = $this;
+        $variables['element'] = $element;
+        $variables['this'] = $this;
 
-    $siteHandle = Craft::$app->request->get('site', null);
-		$currentSite = Craft::$app->sites->currentSite;
-		if ($siteHandle && $siteHandle !== $currentSite->handle) {
-			Craft::$app->sites->setCurrentSite(Craft::$app->sites->getSiteByHandle());
-		}
+        $siteHandle = Craft::$app->request->get('site', null);
+        $currentSite = Craft::$app->sites->currentSite;
+        if ($siteHandle && $siteHandle !== $currentSite->handle) {
+            Craft::$app->sites->setCurrentSite(Craft::$app->sites->getSiteByHandle());
+        }
 
-		$options = json_decode('[' . $view->renderString($this->checkboxOptions, $variables) . ']', true);
-		
-		$view->setTemplateMode($templateMode);
-    if ($siteHandle !== $currentSite->handle) {
-			Craft::$app->sites->setCurrentSite($currentSite);
-		}
+        $options = json_decode('[' . $view->renderString($this->checkboxOptions, $variables) . ']', true);
 
-		if ($this->isFresh($element)) :
-			foreach ($options as $key => $option) :
-				if (!empty($option['default'])) :
-					$value[] = $option['value'];
-				endif;
-			endforeach;
-		endif;
+        $view->setTemplateMode($templateMode);
+        if ($siteHandle !== $currentSite->handle) {
+            Craft::$app->sites->setCurrentSite($currentSite);
+        }
 
-		if (is_array($value)) :
-			$value = json_encode($value);
-		endif;
+        if ($this->isFresh($element)) :
+            foreach ($options as $key => $option) :
+                if (!empty($option['default'])) :
+                    $value[] = $option['value'];
+                endif;
+            endforeach;
+        endif;
 
-		return (is_null($value) ? '' : $value);
+        if (is_array($value)) :
+            $value = json_encode($value);
+        endif;
+
+        return (is_null($value) ? '' : $value);
     }
 
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-		$view = Craft::$app->getView();
-		$templateMode = $view->getTemplateMode();
-		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
+        $view = Craft::$app->getView();
+        $templateMode = $view->getTemplateMode();
+        $view->setTemplateMode($view::TEMPLATE_MODE_SITE);
 
-		$variables['element'] = $element;
-		$variables['this'] = $this;
+        $variables['element'] = $element;
+        $variables['this'] = $this;
 
-		$options = json_decode('[' . $view->renderString($this->checkboxOptions, $variables) . ']', true);
+        $options = json_decode('[' . $view->renderString($this->checkboxOptions, $variables) . ']', true);
 
-		$view->setTemplateMode($templateMode);
+        $view->setTemplateMode($templateMode);
 
-		return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/checkboxGroup', [
+        return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/checkboxGroup', [
             'name' => $this->handle,
             'values' => $value,
             'options' => $options
