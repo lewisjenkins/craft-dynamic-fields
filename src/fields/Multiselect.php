@@ -32,7 +32,7 @@ class Multiselect extends Field
             ]
         );
     }
-    
+
     public function getContentColumnType(): string
     {
         return $this->columnType;
@@ -43,14 +43,23 @@ class Multiselect extends Field
 		$view = Craft::$app->getView();
 		$templateMode = $view->getTemplateMode();
 		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
-		
+
 		$variables['element'] = $element;
 		$variables['this'] = $this;
-		
+
+    $siteHandle = Craft::$app->request->get('site', null);
+		$currentSite = Craft::$app->sites->currentSite;
+		if ($siteHandle && $siteHandle !== $currentSite->handle) {
+			Craft::$app->sites->setCurrentSite(Craft::$app->sites->getSiteByHandle());
+		}
+
 		$options = json_decode('[' . $view->renderString($this->multiselectOptions, $variables) . ']', true);
-		
+
 		$view->setTemplateMode($templateMode);
-		
+    if ($siteHandle !== $currentSite->handle) {
+			Craft::$app->sites->setCurrentSite($currentSite);
+		}
+
 		if ($this->isFresh($element)) :
 			foreach ($options as $key => $option) :
 				if (!empty($option['default'])) :
@@ -58,32 +67,32 @@ class Multiselect extends Field
 				endif;
 			endforeach;
 		endif;
-		
+
 		if (is_array($value)) :
 			$value = json_encode($value);
 		endif;
-		
+
 		return (is_null($value) ? '' : $value);
     }
-    
+
     public function getInputHtml($value, ElementInterface $element = null): string
     {
 		$view = Craft::$app->getView();
 		$templateMode = $view->getTemplateMode();
 		$view->setTemplateMode($view::TEMPLATE_MODE_SITE);
-		
+
 		$variables['element'] = $element;
 		$variables['this'] = $this;
-		
+
 		$options = json_decode('[' . $view->renderString($this->multiselectOptions, $variables) . ']', true);
-		
+
 		$view->setTemplateMode($templateMode);
-		
+
         return Craft::$app->getView()->renderTemplate('craft-dynamic-fields/_includes/forms/multiselect', [
             'name' => $this->handle,
             'values' => $value,
             'options' => $options,
             'size' => ($this->fieldHeight > 0 ? $this->fieldHeight : count($options))
         ]);
-    }  
+    }
 }
