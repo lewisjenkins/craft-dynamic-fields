@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.11 - 2020-02-13
+### Changed
+- Minor bug fix.
+
 ## 3.0.10 - 2019-07-24
 ### Changed
 - Minor compatibility update following release of Craft 3.2.
