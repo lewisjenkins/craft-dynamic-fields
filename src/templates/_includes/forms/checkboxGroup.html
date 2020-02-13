@@ -3,7 +3,7 @@
 {% endif -%}
 
 {%- set options = (options is defined ? options : []) %}
-{%- set values = (values is defined ? values : []) %}
+{%- set values = (values is defined ? values|json_decode : []) %}
 {%- set name = (name is defined and name ? name~'[]' : null) %}
 
 <div class="checkbox-group"
