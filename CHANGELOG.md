@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.12 - 2021-09-23
+### Changed
+- Merged [#38](https://github.com/lewisjenkins/craft-dynamic-fields/pull/38)
+
 ## 3.0.11 - 2020-02-13
 ### Changed
 - Minor bug fix.
