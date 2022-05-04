@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## 4.0.2 - 2022-05-04
 ### Changed
-- Initial release for Craft 4.0
+- Initial release for Craft 4
 
 ## 3.0.12 - 2021-09-23
 ### Changed
