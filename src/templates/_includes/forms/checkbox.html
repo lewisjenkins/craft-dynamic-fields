@@ -1,4 +1,4 @@
-{%- spaceless %}
+{%- apply spaceless %}
 
 {% set class = [
     (class is defined ? class : null),
@@ -26,4 +26,4 @@
 
 <label for="{{ id }}">{{ label|raw }}</label>
 
-{% endspaceless -%}
+{% endapply -%}
