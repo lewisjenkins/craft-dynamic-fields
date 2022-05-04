@@ -21,7 +21,7 @@ class Checkboxes extends Field
         return Craft::t('craft-dynamic-fields', 'Checkboxes (dynamic)');
     }
 
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate(
             'craft-dynamic-fields/_components/fields/Checkboxes_settings',
