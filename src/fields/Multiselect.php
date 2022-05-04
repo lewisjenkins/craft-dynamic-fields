@@ -23,7 +23,7 @@ class Multiselect extends Field
         return Craft::t('craft-dynamic-fields', 'Multi-select (dynamic)');
     }
 
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate(
             'craft-dynamic-fields/_components/fields/Multiselect_settings',
