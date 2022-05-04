@@ -1,10 +1,10 @@
-# LJ Dynamic Fields plugin for Craft CMS 3.x
+# LJ Dynamic Fields plugin for Craft CMS 4.
 
 Populate Craft fields with dynamic data using the power of Twig.
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0 or later.
+This plugin requires Craft CMS 4.
 
 ## Installation
 
